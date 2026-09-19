@@ -1,0 +1,8 @@
+# Lokaler ZIP-Store. Die ZIPs liegen als Release-Assets im Gitea-Repo,
+# nicht in der Git-History (siehe doku.md).
+archive_zips/
+
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
