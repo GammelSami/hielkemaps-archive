@@ -1,78 +1,70 @@
 # Hielke Maps Archiv-Doku
 
-## Ziel
-Aus den Seiten
-- `https://hielkemaps.com/maps/`
-- `https://hielkemaps.com/community-maps/`
+Das Skript sammelt offizielle und Community-Maps von hielkemaps.com,
+liest Minecraft-Versionen aus `level.dat`, sichert ZIPs und Thumbnails und
+erzeugt getrennte Markdown-Tabellen. Bereits bekannte Download-URLs bleiben
+auch dann enthalten, wenn sie von den Übersichtsseiten verschwinden.
 
-wurde ein lokales Archiv gebaut mit:
-- Wayback-Links pro Map-Version
-- lokal gespeicherten ZIP-Snapshots
-- separater Community-/Official-Aufteilung
-- lokal gespeicherten Map-Thumbnails
+## Einrichtung und Aktualisierung
 
-## Wichtige Dateien
-- `build_hielke_archive_md.py`
-  - Hauptskript zum Einsammeln von Maps, Wayback-Snapshots und Versionen aus `level.dat` (NBT via `nbt2yaml`).
-- `hielke-maps-archive-official.md`
-  - Offizielle Maps.
-- `hielke-maps-archive-community.md`
-  - Community-Maps.
-- `archive_zips/`
-  - Lokale ZIP-Snapshots je Map.
-- `thumbnails/`
-  - Gespeicherte Thumbnail-Bilder + `thumbnails/INDEX.md`.
+Voraussetzungen: Python 3.10+, Git und die angemeldete GitHub CLI `gh` mit
+Schreibzugriff auf das Zielrepository. Das Repository muss bereits existieren
+und einen Branch `main` enthalten.
 
-## Aktueller Stand
-- Official Maps: alle mit `1.21.11`-Zeile inkl. Archive.org-Link.
-- Community Maps: enthalten den jeweils aktuell erkannten Stand (nicht zwingend `1.21.11`).
-- Live-Download-Spalte wurde entfernt (gewünscht).
+Im Projektverzeichnis:
 
-## ZIP-Namensschema
-Dateiname:
-- `YYYYMMDDHHMMSS__<version>.zip`
+```sh
+python -m venv .venv
+.venv/bin/pip install -r requirements.txt
+gh auth login
+.venv/bin/python -u build_hielke_archive_md.py
+```
 
-Beispiel:
-- `20260211182405__1.20.2.zip`
+Standardziel: `GammelSami/hielkemaps-archive`. Ein anderes Repository lässt
+sich über `ARCHIVE_REPO=owner/repo` festlegen.
 
-`YYYYMMDDHHMMSS` ist der Snapshot-/Save-Zeitpunkt (UTC), nicht zwingend ein eindeutiger Inhalt.
+Bei einem Wayback-Ausfall:
 
-## Duplikate / Dedupe
-Es gab doppelte Dateien mit unterschiedlichen Timestamps, aber identischem Inhalt (gleicher SHA1).
+```sh
+.venv/bin/python -u build_hielke_archive_md.py --skip-wayback
+```
 
-Gefixt:
-- bestehende Duplikate wurden bereinigt.
-- im Skript wurde Dedupe eingebaut:
-  - identischer ZIP-Inhalt pro Map-Ordner wird nicht erneut gespeichert.
+`--skip-upload` aktualisiert nur lokal. Die erzeugten GitHub-Links funktionieren
+erst, nachdem die zugehörigen Release-Anhänge hochgeladen wurden.
 
-## URL-Normalisierung
-Community-Downloadlinks mit Leerzeichen wurden auf URL-encoded Form gebracht (`%20`), damit
-- Live-Download funktioniert,
-- Wayback-`/save` nicht an ungültigen URLs scheitert.
+## Dateien und Speicherung
 
-## Script-Verhalten (`build_hielke_archive_md.py`)
-- liest Map-Quellen (`maps` + `community-maps`)
-- bildet Official-Downloadlinks aus Slugs (`/maps/<slug>` -> `/downloads/<Title Case>.zip`)
-- holt CDX-Snapshots von Wayback
-- lädt ZIPs und liest Minecraft-Version aus `level.dat`
-- schreibt Markdown-Tabellen
-- speichert ZIPs lokal in `archive_zips/<Map>/...`
-- mit Retry/Backoff + leichtem Request-Delay
-- inkrementell: vorhandene lokale ZIPs werden wiederverwendet
+- `hielke-maps-archive-official.md` und `hielke-maps-archive-community.md`:
+  neuester Snapshot je erkannter Minecraft-Version, Download- und Wayback-Links.
+- `archive_zips/<Map>/YYYYMMDDHHMMSS__<Minecraft-Version>.zip`:
+  lokaler ZIP-Bestand; wird nicht in Git gespeichert.
+- `archive_zips/_no_wayback.json`: merkt sich lokale Snapshots ohne bestätigten
+  Wayback-Zeitstempel. Zusammen mit dem ZIP-Bestand sichern.
+- `thumbnails/`: Bilder und `INDEX.md`, in Git gespeichert.
 
-## Thumbnails
-Gespeichert unter:
-- `thumbnails/maps/...`
-- `thumbnails/community-maps/...`
+Je Map wird ein GitHub-Release `map-<name>` erstellt. Alle lokalen ZIPs dieser
+Map werden als Anhänge hochgeladen, auch mehrere Snapshots derselben
+Minecraft-Version. Vorhandene Anhänge werden übersprungen und nicht ersetzt.
+Byte-identische Downloads werden pro Map anhand ihres SHA1 dedupliziert.
+Der SHA1 in den Tabellen ist auf zwölf Zeichen gekürzt und dient als
+Inhaltskennung. Der Zeitstempel bezeichnet den Snapshot-/Sicherungszeitpunkt
+in UTC, nicht das Veröffentlichungsdatum der Map.
 
-Index:
-- `thumbnails/INDEX.md`
+Ein Git-Clone enthält die Tabellen, das Skript und die Thumbnails. ZIPs müssen
+separat aus den Releases heruntergeladen werden. Der lokale ZIP-Bestand sollte
+für inkrementelle Aktualisierungen erhalten bleiben.
 
-## Hinweis zur Regeneration
-Falls neu generiert wird:
-- `build_hielke_archive_md.py` erzeugt standardmäßig `hielke-maps-archive.md`.
-- Aktuell nutzt das Projekt getrennte Dateien:
-  - `hielke-maps-archive-official.md`
-  - `hielke-maps-archive-community.md`
+Download- und Wayback-Fehler erscheinen am Ende der jeweiligen Tabelle.
+Fehlgeschlagene Release-Uploads brechen den Lauf vor dem Schreiben der Tabellen
+ab; nach Behebung kann der Lauf wiederholt werden. Das Skript führt keinen
+Git-Commit oder Push aus.
 
-Bei Bedarf nach Lauf erneut splitten oder den Split direkt ins Skript integrieren.
+## Tests
+
+```sh
+.venv/bin/python -m unittest -v test_archive
+```
+
+Die Tests prüfen ZIP-Validierung und Deduplizierung, den Erhalt mehrerer
+Snapshots derselben Version beim Upload, Release-Abfragefehler und
+Thumbnail-Pfade mit doppeltem Schrägstrich.
