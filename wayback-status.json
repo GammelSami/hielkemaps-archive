@@ -1,0 +1,218 @@
+{
+  "https://hielkemaps.com/downloads/community/Halloween%20Spiral.zip": {
+    "status": "verified",
+    "local_zip": "archive_zips/Halloween_Spiral/20260211182108__1.17.1.zip",
+    "sha256": "71d97de95bf40cc1f5dd0e7f79f1010e9372ca620b9219d9385dccac733ffa71",
+    "requested_at": "2026-09-20T10:16:57.404655+00:00",
+    "job_id": "spn2-bd5551b5fa4c0fde8eb49f5444276aaed9b2a8e6",
+    "job_status": "success",
+    "capture_url": "https://web.archive.org/web/20260920101702if_/https://hielkemaps.com/downloads/community/Halloween%20Spiral.zip"
+  },
+  "https://hielkemaps.com/downloads/community/Halloween%20Spiral%202.zip": {
+    "status": "verified",
+    "local_zip": "archive_zips/Halloween_Spiral_2/20260211182135__1.19.2.zip",
+    "sha256": "7788c395af4784d54d666a65e2fdef5cb9a9c0a8af9aaefe930daf75ef93faca",
+    "requested_at": "2026-09-20T10:17:35.546349+00:00",
+    "job_id": "spn2-1d2fe6d9e537ad10a3f89263c1b1580f0ad23595",
+    "job_status": "success",
+    "capture_url": "https://web.archive.org/web/20260920101738if_/https://hielkemaps.com/downloads/community/Halloween%20Spiral%202.zip"
+  },
+  "https://hielkemaps.com/downloads/community/Halloween%20Spiral%203.zip": {
+    "status": "failed",
+    "local_zip": "archive_zips/Halloween_Spiral_3/20260211182220__1.20.2.zip",
+    "sha256": "fe239601bfddc92794ff2046baa3d1a9bcf30bce661d487b78c8968c9d1195dc",
+    "requested_at": "2026-09-20T10:23:56.578720+00:00",
+    "job_status": "error",
+    "error": "This URL has been already captured 1 times today, which is a daily limit we have set for that Resource type. Please try again tomorrow. Please email us at \"info@archive.org\" if you would like to discuss this more."
+  },
+  "https://hielkemaps.com/downloads/community/Halloween%20Spiral%204.zip": {
+    "status": "verified",
+    "local_zip": "archive_zips/Halloween_Spiral_4/20260211182247__1.21.4.zip",
+    "sha256": "507f4670d1d9c936340ada75c7d4a86547451e524be3c161e2bc12b13b188841",
+    "requested_at": "2026-09-20T10:18:29.962362+00:00",
+    "job_id": "spn2-56092be63ce409ef0456e7293dcb15f412d80854",
+    "job_status": "success",
+    "capture_url": "https://web.archive.org/web/20260920101832if_/https://hielkemaps.com/downloads/community/Halloween%20Spiral%204.zip"
+  },
+  "https://hielkemaps.com/downloads/community/Halloween%20Spiral%205.zip": {
+    "status": "verified",
+    "local_zip": "archive_zips/Halloween_Spiral_5/20260920021239__1.21.11.zip",
+    "sha256": "919a293c526e24ded9da094a10d1f8f850f353307aa0c43b025a11aa2fa2abba",
+    "requested_at": "2026-09-20T10:19:09.797943+00:00",
+    "job_id": "spn2-c0e9ddec95461f77ac9a31df2b8e94b661c1a46d",
+    "job_status": "success",
+    "capture_url": "https://web.archive.org/web/20260920101911if_/https://hielkemaps.com/downloads/community/Halloween%20Spiral%205.zip"
+  },
+  "https://hielkemaps.com/downloads/community/Dimension%20Eggs.zip": {
+    "status": "verified",
+    "local_zip": "archive_zips/Dimension_Eggs/20260211182319__1.18.2.zip",
+    "sha256": "034bc05a8820a15839c456dc205fce16613a99d1af21e76db5b952d05ac3402d",
+    "requested_at": "2026-09-20T10:19:43.351254+00:00",
+    "job_id": "spn2-d113d1e00e2ac0af1666e7edbec7d190e63bae80",
+    "job_status": "success",
+    "capture_url": "https://web.archive.org/web/20260920102011if_/https://hielkemaps.com/downloads/community/Dimension%20Eggs.zip"
+  },
+  "https://hielkemaps.com/downloads/community/Christmas%20Pyramid.zip": {
+    "status": "verified",
+    "local_zip": "archive_zips/Christmas_Pyramid/20260211182339__1.17.1.zip",
+    "sha256": "821e6200442a1e92fe5dd6504d4ce6a244dfe32d89020878e6e7c0090d3d7bc9",
+    "requested_at": "2026-09-20T10:20:43.645052+00:00",
+    "job_id": "spn2-ff5e765d05efd3e535fbac1dc66354929a67dc49",
+    "job_status": "success",
+    "capture_url": "https://web.archive.org/web/20260920102046if_/https://hielkemaps.com/downloads/community/Christmas%20Pyramid.zip"
+  },
+  "https://hielkemaps.com/downloads/community/Summer%20Paradise.zip": {
+    "status": "failed",
+    "local_zip": "archive_zips/Summer_Paradise/20260211182405__1.20.2.zip",
+    "sha256": "55f0489d878c18df765abf711a1540ad981394ed31725f96fa42bc3d67d45f29",
+    "requested_at": "2026-09-20T10:24:24.532301+00:00",
+    "previous_jobs": [
+      "spn2-0e95e990dac26ebdfd2cf00fcf7cd567e4003198"
+    ],
+    "job_status": "error",
+    "error": "This URL has been already captured 1 times today, which is a daily limit we have set for that Resource type. Please try again tomorrow. Please email us at \"info@archive.org\" if you would like to discuss this more."
+  },
+  "https://hielkemaps.com/downloads/community/Summer%20Paradise%202.zip": {
+    "status": "verified",
+    "local_zip": "archive_zips/Summer_Paradise_2/20260920021304__1.21.11.zip",
+    "sha256": "463aa955b59f9b84d1e70e38a442ed6f2d1408a2af35bc01c7b69f6cf8ff2fc3",
+    "requested_at": "2026-09-20T10:25:02.587489+00:00",
+    "job_id": "spn2-062ef9b87b7fca20f2f58bdb96bc3e09aff4a1ac",
+    "job_status": "success",
+    "capture_url": "https://web.archive.org/web/20260920102505if_/https://hielkemaps.com/downloads/community/Summer%20Paradise%202.zip"
+  },
+  "https://hielkemaps.com/downloads/community/Winter%20Paradise.zip": {
+    "status": "verified",
+    "local_zip": "archive_zips/Winter_Paradise/20260211182502__1.19.2.zip",
+    "sha256": "f3829fc90e65087ae478f24f2af803c53b4e6d82d80b6f0e42eb2bc105862089",
+    "requested_at": "2026-09-20T10:25:38.694882+00:00",
+    "job_id": "spn2-a2dbf7f0acf810c626661874ccc2e71ac0a32a09",
+    "job_status": "success",
+    "capture_url": "https://web.archive.org/web/20260920102543if_/https://hielkemaps.com/downloads/community/Winter%20Paradise.zip"
+  },
+  "https://hielkemaps.com/downloads/community/Candy%20Cane%20Parkour.zip": {
+    "status": "verified",
+    "local_zip": "archive_zips/Candy_Cane_Parkour/20260211182534__1.20.4.zip",
+    "sha256": "1ffc57fec2649c7ca00d52ede3af2c276338b155c84b575d96a9fa6b97a4595d",
+    "requested_at": "2026-09-20T10:26:29.416879+00:00",
+    "job_id": "spn2-0026c1cd1d8608d8c55f12acca959e09669a9ff9",
+    "job_status": "success",
+    "capture_url": "https://web.archive.org/web/20260920102634if_/https://hielkemaps.com/downloads/community/Candy%20Cane%20Parkour.zip"
+  },
+  "https://hielkemaps.com/downloads/Arrow%20Fight.zip": {
+    "status": "verified",
+    "local_zip": "archive_zips/Arrow_Fight/20260920024129__1.19.2.zip",
+    "sha256": "8faa61d924e80454facd969035ccc20a8c23f44ef43585622dee6b8ccd635989",
+    "requested_at": "2026-09-20T10:27:16.891595+00:00",
+    "previous_jobs": [
+      "spn2-5147a6817731a75205e867b2a3df0b1fa100bdc1"
+    ],
+    "job_id": "spn2-5147a6817731a75205e867b2a3df0b1fa100bdc1",
+    "job_status": "success",
+    "capture_url": "https://web.archive.org/web/20260920102730if_/https://hielkemaps.com/downloads/Arrow%20Fight.zip"
+  },
+  "https://hielkemaps.com/downloads/Arrow%20Fight%20Resource%20Pack.zip": {
+    "status": "verified",
+    "local_zip": "archive_zips/Arrow_Fight_Resource_Pack/20260920024212__Resource_pack.zip",
+    "sha256": "06020abb952215dcda38c185a6ef91cfe49a29e3932ee38430c79b7339a08d4f",
+    "requested_at": "2026-09-20T02:42:12.093719+00:00",
+    "job_id": "spn2-fbeabbc121b7b17e52bf926f2387001d2a33dd99",
+    "capture_url": "https://web.archive.org/web/20260920024212if_/https://hielkemaps.com/downloads/Arrow%20Fight%20Resource%20Pack.zip"
+  },
+  "https://hielkemaps.com/downloads/Dimension%20Parkour.zip": {
+    "status": "verified",
+    "local_zip": "archive_zips/Dimension_Parkour/20260920021926__26.2.zip",
+    "sha256": "a5eb2a851feb66235c76ddaf51f536738c50e3e0a234deca226be8b33c239e31",
+    "requested_at": "2026-09-20T02:42:38.400461+00:00",
+    "job_id": "spn2-cd42b9c35248ea3eed6671e6147ea068d9647713",
+    "capture_url": "https://web.archive.org/web/20260920024341if_/https://hielkemaps.com/downloads/Dimension%20Parkour.zip"
+  },
+  "https://hielkemaps.com/downloads/Parkour%20Egg.zip": {
+    "status": "verified",
+    "local_zip": "archive_zips/Parkour_Egg/20260920021343__26.2.zip",
+    "sha256": "41782182c54f105c3a3da0695fa7082254c6fed4469ea6edae900f333dcb6af9",
+    "requested_at": "2026-09-20T02:44:16.762836+00:00",
+    "job_id": "spn2-52e0bd47acae15a85b3b8362fba572c93bbd9597",
+    "capture_url": "https://web.archive.org/web/20260920024512if_/https://hielkemaps.com/downloads/Parkour%20Egg.zip"
+  },
+  "https://hielkemaps.com/downloads/Parkour%20Paradise.zip": {
+    "status": "verified",
+    "local_zip": "archive_zips/Parkour_Paradise/20260920021719__26.2.zip",
+    "sha256": "3193facba92a3f656eec66ec7545b26d8c5d1bdce87a46d7c4adf8a0e03b1ab6",
+    "requested_at": "2026-09-20T02:45:41.736555+00:00",
+    "job_id": "spn2-38d0a3245ed45cf36fc196a987f747cbab0f677d",
+    "capture_url": "https://web.archive.org/web/20260920024542if_/https://hielkemaps.com/downloads/Parkour%20Paradise.zip"
+  },
+  "https://hielkemaps.com/downloads/Parkour%20Paradise%202.zip": {
+    "status": "verified",
+    "local_zip": "archive_zips/Parkour_Paradise_2/20260920021745__26.2.zip",
+    "sha256": "2fa77e0c913cc301dfe0b69f205a521c32248187550d9423f8c3d41f0712ccb3",
+    "requested_at": "2026-09-20T02:46:07.520561+00:00",
+    "job_id": "spn2-1f8c39b9c90fe0faf1d13db10bc70319092991cc",
+    "capture_url": "https://web.archive.org/web/20260920024609if_/https://hielkemaps.com/downloads/Parkour%20Paradise%202.zip"
+  },
+  "https://hielkemaps.com/downloads/Parkour%20Paradise%203.zip": {
+    "status": "verified",
+    "local_zip": "archive_zips/Parkour_Paradise_3/20260920021853__26.2.zip",
+    "sha256": "ecb5db7291d516730045f2abd16ffa7155c1f4fec769a52f88eb0dae88b76bf8",
+    "requested_at": "2026-09-20T02:46:42.830775+00:00",
+    "job_id": "spn2-a62e631c1df344d3cf7ed000ec657a9d8400eb06",
+    "capture_url": "https://web.archive.org/web/20260920024643if_/https://hielkemaps.com/downloads/Parkour%20Paradise%203.zip"
+  },
+  "https://hielkemaps.com/downloads/Parkour%20Pyramid.zip": {
+    "status": "verified",
+    "local_zip": "archive_zips/Parkour_Pyramid/20260920021943__26.2.zip",
+    "sha256": "f43fb62f9321378f1595d369b6de5d3309a6007b8a9959c38886021ad34076f6",
+    "requested_at": "2026-09-20T10:28:06.330619+00:00",
+    "previous_jobs": [
+      "spn2-0614917ac461549880b9371175f6fb1015b0fa2b"
+    ],
+    "job_id": "spn2-0614917ac461549880b9371175f6fb1015b0fa2b",
+    "job_status": "success",
+    "capture_url": "https://web.archive.org/web/20260920102817if_/https://hielkemaps.com/downloads/Parkour%20Pyramid.zip"
+  },
+  "https://hielkemaps.com/downloads/Parkour%20Spiral.zip": {
+    "status": "verified",
+    "local_zip": "archive_zips/Parkour_Spiral/20260920021435__26.2.zip",
+    "sha256": "24f5936a381d50052dafd3b7900927e16b17e55c6984364b4b06e9680f90aa9e",
+    "requested_at": "2026-09-20T02:48:14.856040+00:00",
+    "job_id": "spn2-f56b091a4316a87dab6c9033110cae342e879575",
+    "capture_url": "https://web.archive.org/web/20260920024816if_/https://hielkemaps.com/downloads/Parkour%20Spiral.zip"
+  },
+  "https://hielkemaps.com/downloads/Parkour%20Spiral%202.zip": {
+    "status": "verified",
+    "local_zip": "archive_zips/Parkour_Spiral_2/20260920021516__26.2.zip",
+    "sha256": "ead5be00350fd569e053dd8aa6c2f94726158818af6ccc74ef8700d0e972060e",
+    "requested_at": "2026-09-20T02:48:51.541146+00:00",
+    "job_id": "spn2-72d6e41edca36d926e281a8411d39b4ec0267a06",
+    "capture_url": "https://web.archive.org/web/20260920024853if_/https://hielkemaps.com/downloads/Parkour%20Spiral%202.zip"
+  },
+  "https://hielkemaps.com/downloads/Parkour%20Spiral%203.zip": {
+    "status": "verified",
+    "local_zip": "archive_zips/Parkour_Spiral_3/20260920021603__26.2.zip",
+    "sha256": "75ecb4a242b43ba95419792635221ad063f02ceb4ff50594642cb28f517892a9",
+    "requested_at": "2026-09-20T02:49:34.207090+00:00",
+    "job_id": "spn2-e7749dea70840676f7746d926786502a71590967",
+    "capture_url": "https://web.archive.org/web/20260920024935if_/https://hielkemaps.com/downloads/Parkour%20Spiral%203.zip"
+  },
+  "https://hielkemaps.com/downloads/Parkour%20Town.zip": {
+    "status": "verified",
+    "local_zip": "archive_zips/Parkour_Town/20260920021412__26.2.zip",
+    "sha256": "18f4b378ee08ad4b0714254e5d65cb6573fa97020ac3497d8ca4fab44211d0f2",
+    "requested_at": "2026-09-20T10:29:05.806782+00:00",
+    "previous_jobs": [
+      "spn2-fc2b82d409ac8d2862121db2abaef109b54ee4fb"
+    ],
+    "job_id": "spn2-fc2b82d409ac8d2862121db2abaef109b54ee4fb",
+    "job_status": "success",
+    "capture_url": "https://web.archive.org/web/20260920102916if_/https://hielkemaps.com/downloads/Parkour%20Town.zip"
+  },
+  "https://hielkemaps.com/downloads/Parkour%20Volcano.zip": {
+    "status": "verified",
+    "local_zip": "archive_zips/Parkour_Volcano/20260920021321__26.2.zip",
+    "sha256": "3929da5b40959a0a1058d8d00b2bea5aa736451515db65839d572d11275d3bd7",
+    "requested_at": "2026-09-20T02:50:28.811788+00:00",
+    "job_id": "spn2-bf2c235babd61950a4a434f3212761e5e2cf6a59",
+    "capture_url": "https://web.archive.org/web/20260920025115if_/https://hielkemaps.com/downloads/Parkour%20Volcano.zip"
+  }
+}

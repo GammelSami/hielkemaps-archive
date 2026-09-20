@@ -1,0 +1,46 @@
+{
+  "checked_at": "2026-09-20T10:18:03.101667+00:00",
+  "discovery": {
+    "listing_maps": 11,
+    "sitemap_maps": 12,
+    "community_downloads": 11,
+    "current_zip_urls": 24,
+    "sitemap_only_maps": [
+      "arrow-fight"
+    ]
+  },
+  "historical_index": {
+    "checked_at": "2026-09-20T10:30:08.415191+00:00",
+    "capture_records": 84,
+    "distinct_content_digests": 84,
+    "missing_capture_digests": []
+  },
+  "local_and_github": {
+    "releases": 24,
+    "zip_files": 87,
+    "table_download_links": 82,
+    "inline_thumbnails": 23,
+    "errors": []
+  },
+  "fresh_wayback_captures": {
+    "checked_at": "2026-09-20T10:31:09.127271+00:00",
+    "verified": 22,
+    "total_current_downloads": 24,
+    "incomplete": [
+      {
+        "url": "https://hielkemaps.com/downloads/community/Halloween%20Spiral%203.zip",
+        "error": "This URL has been already captured 1 times today, which is a daily limit we have set for that Resource type. Please try again tomorrow. Please email us at \"info@archive.org\" if you would like to discuss this more."
+      },
+      {
+        "url": "https://hielkemaps.com/downloads/community/Summer%20Paradise.zip",
+        "error": "This URL has been already captured 1 times today, which is a daily limit we have set for that Resource type. Please try again tomorrow. Please email us at \"info@archive.org\" if you would like to discuss this more."
+      }
+    ]
+  },
+  "layout": {
+    "linked_download_headings": 24,
+    "inline_thumbnails_180px": 23,
+    "table_download_links": 82,
+    "github_markdown_renderer_preserves_image_width": true
+  }
+}

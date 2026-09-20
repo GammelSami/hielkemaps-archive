@@ -7,6 +7,7 @@ Tabellen verlinken auf diese Assets sowie auf archive.org.
 """
 import io
 import argparse
+import configparser
 import json
 import hashlib
 import os
@@ -15,21 +16,28 @@ import subprocess
 import time
 import urllib.parse
 import urllib.request
+import urllib.error
 import zipfile
+import xml.etree.ElementTree as ET
 from collections import OrderedDict, defaultdict
 from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
+from html.parser import HTMLParser
+from html import escape
 
 from nbt2yaml.parse import parse_nbt
 
 
 CDX_API = "https://web.archive.org/cdx/search/cdx"
-OUT_OFFICIAL = "hielke-maps-archive-official.md"
+OUT_OFFICIAL = "hielke-maps-archive-hielke.md"
 OUT_COMMUNITY = "hielke-maps-archive-community.md"
 ARCHIVE_DIR = "archive_zips"
 THUMB_DIR = "thumbnails"
 # ZIPs, deren Zeitstempel von der lokalen Uhr stammt statt von einem Wayback-
 # Snapshot (z.B. weil web.archive.org waehrend des Laufs nicht erreichbar war).
 NO_WAYBACK_INDEX = os.path.join(ARCHIVE_DIR, "_no_wayback.json")
+WAYBACK_INDEX = os.path.join(ARCHIVE_DIR, "_wayback_verified.json")
+WAYBACK_REPORT = "wayback-status.json"
 GH_REPO = os.environ.get("ARCHIVE_REPO", "GammelSami/hielkemaps-archive")
 UA = "Mozilla/5.0 (X11; Linux x86_64) HielkeArchiveBuilder/1.0"
 REQUEST_DELAY_SECONDS = 0.25
@@ -63,23 +71,49 @@ def normalize_url(url: str) -> str:
     return urllib.parse.urlunsplit((parts.scheme, parts.netloc, path, query, parts.fragment))
 
 
+class PageAttributes(HTMLParser):
+    def __init__(self, html):
+        super().__init__()
+        self.elements = []
+        self.feed(html)
+
+    def handle_starttag(self, tag, attrs):
+        self.elements.append((tag, dict(attrs)))
+
+
 def extract_download_urls(html: str) -> list[str]:
     urls = []
-    for raw in re.findall(r'href=["\']([^"\']+\.zip)["\']', html, flags=re.IGNORECASE):
-        if "/downloads/" not in raw:
-            continue
-        abs_url = urllib.parse.urljoin("https://hielkemaps.com", raw)
-        if abs_url.startswith("https://hielkemaps.com/downloads/"):
-            urls.append(normalize_url(abs_url))
+    for _, attrs in PageAttributes(html).elements:
+        for key in ("href", "data-url"):
+            raw = attrs.get(key) or ""
+            abs_url = urllib.parse.urljoin("https://hielkemaps.com", raw)
+            parsed = urllib.parse.urlsplit(abs_url)
+            if parsed.netloc == "hielkemaps.com" and parsed.path.startswith("/downloads/") and parsed.path.lower().endswith(".zip"):
+                urls.append(normalize_url(abs_url))
     return list(OrderedDict.fromkeys(urls))
 
 
 def extract_map_slugs(html: str) -> list[str]:
     slugs = []
-    for raw in re.findall(r"location\.href='(/maps/[^']+)'", html):
-        if raw.startswith("/maps/"):
-            slugs.append(raw.removeprefix("/maps/"))
+    for _, attrs in PageAttributes(html).elements:
+        candidates = [attrs.get("href") or ""]
+        candidates.extend(re.findall(r"(?:window\.)?location(?:\.href)?\s*=\s*['\"]([^'\"]+)['\"]", attrs.get("onclick") or ""))
+        for raw in candidates:
+            parsed = urllib.parse.urlsplit(urllib.parse.urljoin("https://hielkemaps.com", raw))
+            match = re.fullmatch(r"/maps/([^/]+)/?", parsed.path)
+            if parsed.netloc == "hielkemaps.com" and match:
+                slugs.append(match.group(1))
     return list(OrderedDict.fromkeys(slugs))
+
+
+def extract_sitemap_slugs(xml: str) -> list[str]:
+    return list(OrderedDict.fromkeys(
+        match.group(1)
+        for element in ET.fromstring(xml).iter()
+        if element.tag.rsplit("}", 1)[-1] == "loc"
+        for match in [re.fullmatch(r"/maps/([^/]+)/?", urllib.parse.urlsplit(element.text or "").path)]
+        if match
+    ))
 
 
 def slug_to_official_download(slug: str) -> str:
@@ -171,6 +205,8 @@ def read_version_from_zip(zip_bytes: bytes) -> str | None:
                 version = read_mc_version_from_level_dat(data)
                 if version:
                     return version
+            if any(n == "pack.mcmeta" or n.endswith("/pack.mcmeta") for n in names):
+                return "Resource pack"
     except Exception:
         return None
     return None
@@ -185,28 +221,127 @@ def parse_wayback_timestamp(url: str) -> str | None:
     return m.group(1) if m else None
 
 
-def save_current_to_wayback(original_url: str, timeout: int = 120) -> str | None:
-    # Save current live file and return the created archive snapshot URL if available.
-    save_url = f"https://web.archive.org/save/{original_url}"
-    last_exc = None
-    for attempt in range(1, MAX_RETRIES + 1):
-        req = urllib.request.Request(save_url, headers={"User-Agent": UA})
+def wayback_headers() -> dict:
+    headers = {"User-Agent": UA, "Accept": "application/json"}
+    config = configparser.ConfigParser(interpolation=None)
+    explicit = os.environ.get("IA_CONFIG")
+    paths = [explicit] if explicit else [
+        os.path.expanduser("~/.config/ia.ini"),
+        os.path.expanduser("~/.config/internetarchive/ia.ini"),
+    ]
+    config.read([p for p in paths if p])
+    access = config.get("s3", "access", fallback="")
+    secret = config.get("s3", "secret", fallback="")
+    if access and secret:
+        headers["Authorization"] = f"LOW {access}:{secret}"
+    return headers
+
+
+def save_current_to_wayback(original_url: str, timeout: int = 30, status: dict | None = None, checkpoint=None) -> str:
+    """Submit a real Save Page Now job and wait for a completed capture."""
+    status = status if status is not None else {}
+    headers = wayback_headers()
+
+    def request(url, data=None):
+        for attempt in range(3):
+            req = urllib.request.Request(url, data=data, headers=headers)
+            try:
+                with urllib.request.urlopen(req, timeout=timeout) as response:
+                    return json.load(response)
+            except urllib.error.HTTPError as exc:
+                if exc.code not in (429, 500, 502, 503, 504) or attempt == 2:
+                    raise
+                retry_after = exc.headers.get("Retry-After", "60")
+                try:
+                    delay = max(60, int(retry_after))
+                except ValueError:
+                    delay = max(60, int((parsedate_to_datetime(retry_after) - datetime.now(timezone.utc)).total_seconds()))
+            except urllib.error.URLError:
+                if attempt == 2:
+                    raise
+                delay = 30 * (attempt + 1)
+            print(f"  Wayback temporarily unavailable; retry in {delay}s", flush=True)
+            while delay > 0:
+                time.sleep(min(delay, 60))
+                delay -= 60
+
+    status.pop("error", None)
+    if status.get("job_id"):
+        result = {"job_id": status["job_id"], "status": "pending"}
+    else:
+        status.update(status="submitting", requested_at=datetime.now(timezone.utc).isoformat())
+        result = request("https://web.archive.org/save/", urllib.parse.urlencode({"url": original_url, "capture_all": "1"}).encode())
+    job_id = result.get("job_id")
+    if job_id:
+        status.update(status="submitted", job_id=job_id)
+        if checkpoint:
+            checkpoint()
+        print(f"  Wayback job: {job_id}", flush=True)
+    deadline = time.monotonic() + 300
+    while result.get("status") != "success":
+        if result.get("status") == "error" or not job_id:
+            message = result.get("message") or result.get("status_ext") or "Save Page Now returned no completed capture or job ID"
+            if "daily limit" in message.lower():
+                today = datetime.now(timezone.utc).strftime("%Y%m%d")
+                query = urllib.parse.urlencode({"url": original_url, "output": "json", "fl": "timestamp,original", "filter": "statuscode:200", "from": today})
+                rows = json.loads(fetch_text(f"{CDX_API}?{query}"))[1:]
+                captures = [row for row in rows if re.fullmatch(r"\d{14}", row[0]) and row[0].startswith(today)]
+                if captures:
+                    timestamp, original = max(captures)
+                    capture = wayback_download_url(timestamp, original)
+                    status.update(status="captured", capture_url=capture, note="Daily save limit reached; verifying today's existing capture")
+                    return capture
+            status["job_status"] = "error"
+            raise RuntimeError(message)
+        if time.monotonic() >= deadline:
+            raise TimeoutError(f"Wayback job still pending: {job_id}")
+        time.sleep(10)
+        result = request(f"https://web.archive.org/save/status/{urllib.parse.quote(job_id, safe='')}?_t={int(time.time())}")
+    timestamp = result.get("timestamp", "")
+    if not re.fullmatch(r"\d{14}", timestamp) or int(result.get("http_status", 200)) != 200:
+        raise RuntimeError("Wayback capture did not confirm a successful ZIP response")
+    capture = wayback_download_url(timestamp, original_url)
+    status.update(status="captured", job_status="success", capture_url=capture)
+    return capture
+
+
+def refresh_live_snapshot(url: str, payload: bytes, no_wayback: set, verified: dict, status: dict, skip_wayback: bool = False) -> dict:
+    name = map_name(url)
+    version = read_version_from_zip(payload) or "Unknown"
+    sha1 = hashlib.sha1(payload).hexdigest()
+    duplicate = find_identical_snapshot(name, sha1)
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%d%H%M%S")
+    path = write_zip_snapshot(name, timestamp, version, payload)
+    timestamp = os.path.basename(path).split("__", 1)[0]
+    if not duplicate:
+        no_wayback.add(path)
+    print(f"  {'unchanged' if duplicate else 'new snapshot'}: {path} ({version})", flush=True)
+    archive_url = verified.get(path, {}).get("url")
+    if archive_url is None and path not in no_wayback:
+        archive_url = wayback_download_url(timestamp, url)
+    status.update(local_zip=path, sha256=hashlib.sha256(payload).hexdigest())
+    if skip_wayback:
+        status["status"] = "skipped"
+    else:
         try:
-            with urllib.request.urlopen(req, timeout=timeout) as resp:
-                final_url = resp.geturl()
-                if "/web/" in final_url:
-                    time.sleep(REQUEST_DELAY_SECONDS)
-                    return final_url
-            time.sleep(REQUEST_DELAY_SECONDS)
-            return None
+            capture = save_current_to_wayback(url, status=status)
+            captured_payload = fetch_bytes(capture, timeout=180)
+            if hashlib.sha256(captured_payload).hexdigest() != status["sha256"]:
+                raise ValueError("Wayback ZIP differs from the live download; capture not linked")
+            verified[path] = {"url": capture, "sha1": sha1, "sha256": status["sha256"]}
+            no_wayback.discard(path)
+            archive_url = capture
+            status["status"] = "verified"
         except Exception as exc:
-            last_exc = exc
-            time.sleep(min(3.0, 0.75 * attempt))
-    raise last_exc
+            status["status"] = "failed"
+            status["error"] = str(exc)
+            print(f"  Wayback FAILED: {exc}", flush=True)
+    return {"timestamp": timestamp, "archive": archive_url, "local_zip": path,
+            "asset": os.path.basename(path), "sha1": sha1, "version": version, "live_url": url}
 
 
 def map_name(download_url: str) -> str:
-    filename = download_url.rsplit("/", 1)[-1]
+    filename = urllib.parse.urlsplit(download_url).path.rsplit("/", 1)[-1]
     name = urllib.parse.unquote(filename)
     if name.lower().endswith(".zip"):
         name = name[:-4]
@@ -285,7 +420,7 @@ def write_zip_snapshot(map_display_name: str, timestamp: str, version: str, payl
     return rel_path
 
 
-def load_existing_entries(map_display_name: str, original_url: str, no_wayback: set[str]) -> dict[str, dict]:
+def load_existing_entries(map_display_name: str, original_url: str, no_wayback: set[str], verified: dict | None = None) -> dict[str, dict]:
     folder = map_folder_path(map_display_name)
     out = {}
     if not os.path.isdir(folder):
@@ -306,7 +441,7 @@ def load_existing_entries(map_display_name: str, original_url: str, no_wayback: 
             version, sha1 = "Unknown", ""
         out[ts] = {
             "timestamp": ts,
-            "archive": None if rel_path in no_wayback else wayback_download_url(ts, original_url),
+            "archive": (verified or {}).get(rel_path, {}).get("url") or (None if rel_path in no_wayback else wayback_download_url(ts, original_url)),
             "local_zip": rel_path,
             "asset": name,
             "sha1": sha1,
@@ -406,12 +541,10 @@ def write_markdown(out_file: str, title: str, urls: list[str], results: dict, er
 
         for url in sorted(urls, key=map_name):
             name = map_name(url)
-            f.write(f"## {name}\n\n")
-            f.write(f"- Aktuelle Download-URL: {url}\n")
-            f.write(f"- Release: https://github.com/{GH_REPO}/releases/tag/{release_tag(name)}\n")
+            f.write(f"## [{name}]({url})\n\n")
             thumb = thumbs.get(name)
             if thumb:
-                f.write(f"- Thumbnail: `{thumb}`\n")
+                f.write(f'<img src="{urllib.parse.quote(thumb, safe="/")}" alt="{escape(name, quote=True)}" width="180">\n')
             versions = results.get(url, {})
             if not versions:
                 f.write("- Keine Snapshots gefunden.\n\n")
@@ -454,7 +587,7 @@ def extract_thumbnail_urls(maps_html: str, community_html: str) -> dict[str, str
     ):
         out[alt.strip()] = normalize_url(urllib.parse.urljoin("https://hielkemaps.com", src))
     # Offizielle Karten tragen nur den Slug im Pfad.
-    for src in re.findall(r'src=["\']([^"\']*/maps/[^"\']+/thumbnail[^"\']*)["\']', maps_html):
+    for src in re.findall(r'(?:src|content)=["\']([^"\']*/maps/[^"\']+/thumbnail[^"\']*)["\']', maps_html):
         slug = re.search(r"/maps/([^/]+)/", src)
         if not slug:
             continue
@@ -499,40 +632,84 @@ def sync_thumbnails(thumb_urls: dict[str, str]) -> dict[str, str]:
     return local
 
 
-def collect_download_urls(maps_html: str, community_html: str) -> list[str]:
+def collect_download_urls(maps_html: str, community_html: str, sitemap_xml: str, detail_pages: dict | None = None) -> list[str]:
     urls = []
     # Die Community-Seite verlinkt /downloads/community/*.zip direkt.
     urls.extend(extract_download_urls(community_html))
-    # Offizielle Map-Seiten tun das nicht, also aus dem Slug ableiten und pruefen.
-    for slug in extract_map_slugs(maps_html):
-        candidate = slug_to_official_download(slug)
-        if http_status(candidate) == 200:
-            urls.append(candidate)
-        else:
-            print(f"Skipping (not found): {candidate}")
+    listed = extract_map_slugs(maps_html)
+    sitemap = extract_sitemap_slugs(sitemap_xml)
+    if not listed or not sitemap or not urls:
+        raise RuntimeError("Discovery incomplete: map listing, sitemap or community downloads are empty; inspect website structure")
+    for slug in sorted(set(listed) | set(sitemap)):
+        page = fetch_text(f"https://hielkemaps.com/maps/{slug}")
+        downloads = extract_download_urls(page)
+        if not downloads:
+            raise RuntimeError(f"No ZIP links on /maps/{slug}; inspect page before excluding it")
+        urls.extend(downloads)
+        if detail_pages is not None:
+            detail_pages[slug] = page
     # Fallback, falls kuenftiges HTML doch direkte Links enthaelt.
     urls.extend(extract_download_urls(maps_html))
     # Bereits archivierte Maps auch behalten, wenn die Website sie entfernt.
     for path in (OUT_OFFICIAL, OUT_COMMUNITY):
         if os.path.exists(path):
             with open(path, encoding="utf-8") as f:
-                urls.extend(re.findall(r"Aktuelle Download-URL: (https://\S+)", f.read()))
+                previous = f.read()
+                urls.extend(re.findall(r"Aktuelle Download-URL: (https://\S+)", previous))
+                urls.extend(re.findall(r"^## \[[^\]]+\]\((https://hielkemaps\.com/downloads/[^)]+)\)", previous, re.MULTILINE))
     return list(OrderedDict.fromkeys(normalize_url(u) for u in urls))
+
+
+def render_saved_archive():
+    """Refresh tables from saved ZIPs and verified Wayback outcomes, without network requests."""
+    with open(WAYBACK_REPORT, encoding="utf-8") as f:
+        statuses = json.load(f)
+    with open(WAYBACK_INDEX, encoding="utf-8") as f:
+        verified = json.load(f)
+    for status in statuses.values():
+        if status.get("status") == "verified" and status.get("capture_url"):
+            binding = verified.setdefault(status["local_zip"], {})
+            binding.update(url=status["capture_url"], sha256=status["sha256"])
+    no_wayback = load_no_wayback_index()
+    with open(os.path.join(THUMB_DIR, "INDEX.md"), encoding="utf-8") as f:
+        thumbs = dict(re.findall(r"^- (.+?): `([^`]+)`", f.read(), re.MULTILINE))
+    results, errors = {}, {}
+    for url, status in statuses.items():
+        per_map = {}
+        for entry in load_existing_entries(map_name(url), url, no_wayback, verified).values():
+            upsert_version_entry(per_map, entry["version"], entry)
+        results[url] = per_map
+        if status.get("error"):
+            errors[url] = [f"Wayback save failed: {status['error']}"]
+    for path, title, urls in (
+        (OUT_OFFICIAL, "Community Archive - Maps by Hielke", [u for u in statuses if not is_community(u)]),
+        (OUT_COMMUNITY, "Community Archive - Maps by community creators", [u for u in statuses if is_community(u)]),
+    ):
+        write_markdown(path, title, urls, results, errors, thumbs)
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--skip-wayback", action="store_true", help="Wayback bei Ausfall auslassen; bestehende Links behalten")
+    parser.add_argument("--skip-history", action="store_true", help="Skip historical CDX discovery but still save every current download")
     parser.add_argument("--skip-upload", action="store_true", help="Nur lokal aktualisieren; keine Releases hochladen")
     args = parser.parse_args()
     maps_html = fetch_text("https://hielkemaps.com/maps/")
     community_html = fetch_text("https://hielkemaps.com/community-maps/")
-    all_urls = collect_download_urls(maps_html, community_html)
+    sitemap_xml = fetch_text("https://hielkemaps.com/sitemap.xml")
+    detail_pages = {}
+    all_urls = collect_download_urls(maps_html, community_html, sitemap_xml, detail_pages)
 
     print("Syncing thumbnails ...")
-    thumbs = sync_thumbnails(extract_thumbnail_urls(maps_html, community_html))
+    thumbs = sync_thumbnails(extract_thumbnail_urls(maps_html + "".join(detail_pages.values()), community_html))
 
     no_wayback = load_no_wayback_index()
+    try:
+        with open(WAYBACK_INDEX, encoding="utf-8") as f:
+            verified = json.load(f)
+    except FileNotFoundError:
+        verified = {}
+    wayback_status = {url: {"status": "not_attempted"} for url in all_urls}
     results = {}
     errors = defaultdict(list)
 
@@ -540,7 +717,7 @@ def main():
         print(f"[{idx}/{len(all_urls)}] {url}")
         current_map_name = map_name(url)
         per_map = {}
-        existing_by_ts = load_existing_entries(current_map_name, url, no_wayback)
+        existing_by_ts = load_existing_entries(current_map_name, url, no_wayback, verified)
         for item in existing_by_ts.values():
             upsert_version_entry(per_map, item["version"], item)
 
@@ -549,49 +726,16 @@ def main():
         live_version = "Unknown"
         try:
             live_zip_bytes = fetch_bytes(url, timeout=180)
-            live_version = read_version_from_zip(live_zip_bytes) or "Unknown"
-            live_sha1 = hashlib.sha1(live_zip_bytes).hexdigest()
-            duplicate = find_identical_snapshot(current_map_name, live_sha1)
-            if duplicate:
-                # Byte-identisch schon archiviert: vorhandenen Snapshot behalten,
-                # statt fuer dieselbe Datei einen zweiten Zeitstempel zu erfinden.
-                print(f"  unchanged: {duplicate}")
-            else:
-                # 2) Wayback bitten, die Live-Datei jetzt zu sichern. Nur ein echter
-                # Snapshot-Zeitstempel darf zu einem archive.org-Link werden.
-                live_timestamp = datetime.now(timezone.utc).strftime("%Y%m%d%H%M%S")
-                live_archive_url = None
-                try:
-                    live_archive_url = None if args.skip_wayback else save_current_to_wayback(url)
-                    ts = parse_wayback_timestamp(live_archive_url or "")
-                    if ts:
-                        live_timestamp = ts
-                    else:
-                        live_archive_url = None
-                except Exception as exc:
-                    errors[url].append(f"LIVE save failed: {exc}")
-
-                local_zip = write_zip_snapshot(
-                    current_map_name, live_timestamp, live_version, live_zip_bytes
-                )
-                print(f"  new snapshot: {local_zip} ({live_version})")
-                if live_archive_url:
-                    no_wayback.discard(local_zip)
-                else:
-                    no_wayback.add(local_zip)
-                live_entry = {
-                    "timestamp": live_timestamp,
-                    "archive": live_archive_url,
-                    "local_zip": local_zip,
-                    "asset": os.path.basename(local_zip),
-                    "sha1": live_sha1,
-                    "live_url": url,
-                }
+            live_entry = refresh_live_snapshot(url, live_zip_bytes, no_wayback, verified, wayback_status[url], args.skip_wayback)
+            live_version = live_entry["version"]
+            if wayback_status[url]["status"] == "failed":
+                errors[url].append(f"Wayback save failed: {wayback_status[url]['error']}")
         except Exception as exc:
             errors[url].append(f"LIVE download failed: {exc}")
+            wayback_status[url].update(status="download_failed", error=str(exc))
 
         try:
-            rows = [] if args.skip_wayback else cdx_rows(url)
+            rows = [] if args.skip_wayback or args.skip_history else cdx_rows(url)
         except Exception as exc:
             errors[url].append(f"CDX failed: {exc}")
             rows = []
@@ -608,6 +752,10 @@ def main():
                 version = read_version_from_zip(zip_bytes) or "Unknown"
                 sha1 = hashlib.sha1(zip_bytes).hexdigest()
                 local_zip = write_zip_snapshot(current_map_name, ts, version, zip_bytes)
+                previous_capture = verified.get(local_zip, {}).get("url", "")
+                if (parse_wayback_timestamp(previous_capture) or "") < ts:
+                    verified[local_zip] = {"url": wb, "sha1": sha1, "sha256": hashlib.sha256(zip_bytes).hexdigest()}
+                no_wayback.discard(local_zip)
             except Exception as exc:
                 version = "Unknown"
                 errors[url].append(f"{ts}: {exc}")
@@ -627,10 +775,20 @@ def main():
 
         # 3) Neu geholte Live-Version in der Tabelle sicherstellen.
         if live_entry:
+            if not live_entry.get("archive"):
+                live_entry["archive"] = verified.get(live_entry["local_zip"], {}).get("url")
             upsert_version_entry(per_map, live_version, live_entry)
+            if per_map[live_version]["local_zip"] == live_entry["local_zip"]:
+                per_map[live_version] = live_entry
 
         results[url] = per_map
         save_no_wayback_index(no_wayback)
+        with open(WAYBACK_INDEX, "w", encoding="utf-8") as f:
+            json.dump(verified, f, indent=2)
+            f.write("\n")
+        with open(WAYBACK_REPORT, "w", encoding="utf-8") as f:
+            json.dump(wayback_status, f, indent=2)
+            f.write("\n")
 
         if not args.skip_upload:
             sync_release(current_map_name, url, per_map)
@@ -638,13 +796,14 @@ def main():
     official = [u for u in all_urls if not is_community(u)]
     community = [u for u in all_urls if is_community(u)]
     write_markdown(
-        OUT_OFFICIAL, "Hielke Maps Archive - Official", official, results, errors, thumbs
+        OUT_OFFICIAL, "Community Archive - Maps by Hielke", official, results, errors, thumbs
     )
     write_markdown(
         OUT_COMMUNITY, "Hielke Maps Archive - Community", community, results, errors, thumbs
     )
-    print(f"Wrote {OUT_OFFICIAL} ({len(official)} maps) and {OUT_COMMUNITY} ({len(community)} maps).")
+    print(f"Wrote {OUT_OFFICIAL} ({len(official)} downloads) and {OUT_COMMUNITY} ({len(community)} maps).")
+    return 1 if any(errors.values()) else 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

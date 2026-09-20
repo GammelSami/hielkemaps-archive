@@ -1,7 +1,8 @@
 # Hielke Thumbnails
 
-Gespeichert: 22 Bilder
+Gespeichert: 23 Bilder
 
+- Arrow Fight: `thumbnails/maps/arrow-fight/thumbnail.jpg` (102670 bytes) <- https://hielkemaps.com/media/maps/arrow-fight/thumbnail.jpg
 - Candy Cane Parkour: `thumbnails/community-maps/candy-cane-parkour.jpg` (172876 bytes) <- https://hielkemaps.com/media/community-maps/candy-cane-parkour.jpg
 - Christmas Pyramid: `thumbnails/community-maps/christmas-pyramid.jpg` (255282 bytes) <- https://hielkemaps.com/media/community-maps/christmas-pyramid.jpg
 - Dimension Eggs: `thumbnails/community-maps/dimension-eggs.jpg` (204355 bytes) <- https://hielkemaps.com/media/community-maps/dimension-eggs.jpg
