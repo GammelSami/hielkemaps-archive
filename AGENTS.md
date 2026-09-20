@@ -10,7 +10,9 @@
 
 - Render map thumbnails as small inline images (180 px wide), rather than only
   showing their file paths.
-- Make each map heading a hyperlink to its current download URL. Do not add
+- Make each map heading a hyperlink to its map information page, not the ZIP.
+  Link community maps to the community overview and resource packs to their
+  parent map page. Keep ZIP downloads in the version table. Do not add
   separate current-download or release-link lines above the thumbnail/table.
 
 ## Archive completeness

@@ -129,7 +129,7 @@ class ArchiveTests(unittest.TestCase):
             text = output.read_text()
         self.assertIn('<img src="thumbnails/example%20image.jpg" alt="Example" width="180">', text)
         self.assertNotIn('Thumbnail: `', text)
-        self.assertIn('## [Example](https://hielkemaps.com/downloads/Example.zip)', text)
+        self.assertIn('## [Example](https://hielkemaps.com/maps/example)', text)
         self.assertNotIn('Aktuelle Download-URL:', text)
         self.assertNotIn('/releases/tag/', text)
 
@@ -174,11 +174,12 @@ class ArchiveTests(unittest.TestCase):
     def test_known_downloads_survive_linked_heading_format(self):
         with tempfile.TemporaryDirectory() as folder:
             table = Path(folder, 'maps.md')
-            table.write_text('## [Removed Map](https://hielkemaps.com/downloads/Removed%20Map.zip)\n')
+            table.write_text('## [Removed Map](https://hielkemaps.com/downloads/Removed%20Map.zip)\n## [Hidden Map](https://hielkemaps.com/maps/hidden-map)\n<!-- Source download: https://hielkemaps.com/downloads/Hidden%20Map.zip -->\n')
             with patch.object(archive, 'OUT_OFFICIAL', str(table)), patch.object(archive, 'OUT_COMMUNITY', str(Path(folder, 'absent.md'))):
                 with patch.object(archive, 'fetch_text', return_value='<a href="/downloads/Listed.zip">Map</a>'):
                     urls = archive.collect_download_urls('<a href="/maps/listed">Map</a>', '<a href="/downloads/community/Example.zip">Map</a>', '<urlset><url><loc>/maps/listed</loc></url></urlset>')
             self.assertIn('https://hielkemaps.com/downloads/Removed%20Map.zip', urls)
+            self.assertIn('https://hielkemaps.com/downloads/Hidden%20Map.zip', urls)
 
     def test_retry_preserves_success_and_restarts_stale_job(self):
         import json
@@ -214,6 +215,11 @@ class ArchiveTests(unittest.TestCase):
             self.assertEqual(result['https://example.com/pending']['status'], 'verified')
             self.assertEqual(json.loads(index.read_text())[str(local)]['url'], capture)
             self.assertEqual(json.loads(missing.read_text()), [])
+
+    def test_heading_targets_map_pages_and_community_overview(self):
+        self.assertEqual(archive.map_page_url('https://hielkemaps.com/downloads/Parkour%20Egg.zip'), 'https://hielkemaps.com/maps/parkour-egg')
+        self.assertEqual(archive.map_page_url('https://hielkemaps.com/downloads/Arrow%20Fight%20Resource%20Pack.zip'), 'https://hielkemaps.com/maps/arrow-fight')
+        self.assertEqual(archive.map_page_url('https://hielkemaps.com/downloads/community/Halloween%20Spiral.zip'), 'https://hielkemaps.com/community-maps/')
 
 
 if __name__ == "__main__":

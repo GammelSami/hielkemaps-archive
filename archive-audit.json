@@ -38,9 +38,9 @@
     ]
   },
   "layout": {
-    "linked_download_headings": 24,
     "inline_thumbnails_180px": 23,
     "table_download_links": 82,
-    "github_markdown_renderer_preserves_image_width": true
+    "github_markdown_renderer_preserves_image_width": true,
+    "linked_map_page_headings": 24
   }
 }

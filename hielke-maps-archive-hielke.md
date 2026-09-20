@@ -1,12 +1,14 @@
 # Community Archive - Maps by Hielke
 
-_Generated: 2026-09-20 10:31 UTC_
+_Generated: 2026-09-20 10:52 UTC_
 
 Quelle: `https://hielkemaps.com/maps/` und `https://hielkemaps.com/community-maps/`.
 
 Versionen werden aus `level.dat` (NBT, via `nbt2yaml`) gelesen; bei unlesbaren Dateien steht `Unknown`. Die Spalte **Download** zeigt auf das ZIP im passenden GitHub-Release, **Archive.org** auf den Wayback-Snapshot (`-` = kein Wayback-Eintrag vorhanden).
 
-## [Arrow Fight](https://hielkemaps.com/downloads/Arrow%20Fight.zip)
+## [Arrow Fight](https://hielkemaps.com/maps/arrow-fight)
+
+<!-- Source download: https://hielkemaps.com/downloads/Arrow%20Fight.zip -->
 
 <img src="thumbnails/maps/arrow-fight/thumbnail.jpg" alt="Arrow Fight" width="180">
 
@@ -15,14 +17,18 @@ Versionen werden aus `level.dat` (NBT, via `nbt2yaml`) gelesen; bei unlesbaren D
 | 1.19.2 | 2026-09-20 02:41:29 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-arrow-fight/20260920024129__1.19.2.zip) | [Link](https://web.archive.org/web/20260920102730if_/https://hielkemaps.com/downloads/Arrow%20Fight.zip) | `6a8ab717a045` |
 | 1.18.1 | 2022-02-09 20:15:49 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-arrow-fight/20220209201549__1.18.1.zip) | [Link](https://web.archive.org/web/20220209201549if_/https://hielkemaps.com/downloads/Arrow%20Fight.zip) | `d5703c566209` |
 
-## [Arrow Fight Resource Pack](https://hielkemaps.com/downloads/Arrow%20Fight%20Resource%20Pack.zip)
+## [Arrow Fight Resource Pack](https://hielkemaps.com/maps/arrow-fight)
+
+<!-- Source download: https://hielkemaps.com/downloads/Arrow%20Fight%20Resource%20Pack.zip -->
 
 
 | Minecraft Java | Snapshot (UTC) | Download | Archive.org | SHA1 |
 |---|---|---|---|---|
 | Resource pack | 2026-09-20 02:42:12 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-arrow-fight-resource-pack/20260920024212__Resource_pack.zip) | [Link](https://web.archive.org/web/20260920024212if_/https://hielkemaps.com/downloads/Arrow%20Fight%20Resource%20Pack.zip) | `9dbfd6f573d7` |
 
-## [Dimension Parkour](https://hielkemaps.com/downloads/Dimension%20Parkour.zip)
+## [Dimension Parkour](https://hielkemaps.com/maps/dimension-parkour)
+
+<!-- Source download: https://hielkemaps.com/downloads/Dimension%20Parkour.zip -->
 
 <img src="thumbnails/maps/dimension-parkour/thumbnail.jpg" alt="Dimension Parkour" width="180">
 
@@ -32,7 +38,9 @@ Versionen werden aus `level.dat` (NBT, via `nbt2yaml`) gelesen; bei unlesbaren D
 | 1.21.11 | 2026-02-11 18:18:49 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-dimension-parkour/20260211181849__1.21.11.zip) | [Link](https://web.archive.org/web/20260211181849if_/https://hielkemaps.com/downloads/Dimension%20Parkour.zip) | `0f8d33bc2376` |
 | 1.18.1 | 2022-02-09 20:14:23 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-dimension-parkour/20220209201423__1.18.1.zip) | [Link](https://web.archive.org/web/20220209201423if_/https://hielkemaps.com/downloads/Dimension%20Parkour.zip) | `6234f10a0d98` |
 
-## [Parkour Egg](https://hielkemaps.com/downloads/Parkour%20Egg.zip)
+## [Parkour Egg](https://hielkemaps.com/maps/parkour-egg)
+
+<!-- Source download: https://hielkemaps.com/downloads/Parkour%20Egg.zip -->
 
 <img src="thumbnails/maps/parkour-egg/thumbnail.jpg" alt="Parkour Egg" width="180">
 
@@ -44,7 +52,9 @@ Versionen werden aus `level.dat` (NBT, via `nbt2yaml`) gelesen; bei unlesbaren D
 | 1.20.4 | 2024-03-16 14:17:58 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-parkour-egg/20240316141758__1.20.4.zip) | [Link](https://web.archive.org/web/20240316141758if_/https://hielkemaps.com/downloads/Parkour%20Egg.zip) | `c9a6682f7a7e` |
 | 1.19.4 | 2023-06-05 14:54:50 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-parkour-egg/20230605145450__1.19.4.zip) | [Link](https://web.archive.org/web/20230605145450if_/https://hielkemaps.com/downloads/Parkour%20Egg.zip) | `ab130c84eda5` |
 
-## [Parkour Paradise](https://hielkemaps.com/downloads/Parkour%20Paradise.zip)
+## [Parkour Paradise](https://hielkemaps.com/maps/parkour-paradise)
+
+<!-- Source download: https://hielkemaps.com/downloads/Parkour%20Paradise.zip -->
 
 <img src="thumbnails/maps/parkour-paradise/thumbnail.jpg" alt="Parkour Paradise" width="180">
 
@@ -58,7 +68,9 @@ Versionen werden aus `level.dat` (NBT, via `nbt2yaml`) gelesen; bei unlesbaren D
 | 1.18.1 | 2022-02-09 20:13:49 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-parkour-paradise/20220209201349__1.18.1.zip) | [Link](https://web.archive.org/web/20220209201349if_/https://hielkemaps.com/downloads/Parkour%20Paradise.zip) | `511f4a1e7bd0` |
 | 1.17.1 | 2022-01-11 03:16:15 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-parkour-paradise/20220111031615__1.17.1.zip) | [Link](https://web.archive.org/web/20220111031615if_/https://hielkemaps.com/downloads/Parkour%20Paradise.zip) | `fc6eb3341060` |
 
-## [Parkour Paradise 2](https://hielkemaps.com/downloads/Parkour%20Paradise%202.zip)
+## [Parkour Paradise 2](https://hielkemaps.com/maps/parkour-paradise-2)
+
+<!-- Source download: https://hielkemaps.com/downloads/Parkour%20Paradise%202.zip -->
 
 <img src="thumbnails/maps/parkour-paradise-2/thumbnail.jpg" alt="Parkour Paradise 2" width="180">
 
@@ -70,7 +82,9 @@ Versionen werden aus `level.dat` (NBT, via `nbt2yaml`) gelesen; bei unlesbaren D
 | 1.19.3 | 2023-01-02 23:06:30 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-parkour-paradise-2/20230102230630__1.19.3.zip) | [Link](https://web.archive.org/web/20230102230630if_/https://hielkemaps.com/downloads/Parkour%20Paradise%202.zip) | `6c68ec362043` |
 | 1.18.1 | 2022-02-09 20:14:47 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-parkour-paradise-2/20220209201447__1.18.1.zip) | [Link](https://web.archive.org/web/20220209201447if_/https://hielkemaps.com/downloads/Parkour%20Paradise%202.zip) | `741b71aec6c3` |
 
-## [Parkour Paradise 3](https://hielkemaps.com/downloads/Parkour%20Paradise%203.zip)
+## [Parkour Paradise 3](https://hielkemaps.com/maps/parkour-paradise-3)
+
+<!-- Source download: https://hielkemaps.com/downloads/Parkour%20Paradise%203.zip -->
 
 <img src="thumbnails/maps/parkour-paradise-3/thumbnail.jpg" alt="Parkour Paradise 3" width="180">
 
@@ -84,7 +98,9 @@ Versionen werden aus `level.dat` (NBT, via `nbt2yaml`) gelesen; bei unlesbaren D
 | 1.18.2 | 2022-03-21 10:50:12 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-parkour-paradise-3/20220321105012__1.18.2.zip) | [Link](https://web.archive.org/web/20220321105012if_/https://hielkemaps.com/downloads/Parkour%20Paradise%203.zip) | `117336c038e8` |
 | 1.18.1 | 2022-02-09 20:13:19 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-parkour-paradise-3/20220209201319__1.18.1.zip) | [Link](https://web.archive.org/web/20220209201319if_/https://hielkemaps.com/downloads/Parkour%20Paradise%203.zip) | `cd0c79a532fe` |
 
-## [Parkour Pyramid](https://hielkemaps.com/downloads/Parkour%20Pyramid.zip)
+## [Parkour Pyramid](https://hielkemaps.com/maps/parkour-pyramid)
+
+<!-- Source download: https://hielkemaps.com/downloads/Parkour%20Pyramid.zip -->
 
 <img src="thumbnails/maps/parkour-pyramid/thumbnail.jpg" alt="Parkour Pyramid" width="180">
 
@@ -97,7 +113,9 @@ Versionen werden aus `level.dat` (NBT, via `nbt2yaml`) gelesen; bei unlesbaren D
 | 1.18.2 | 2022-06-04 16:15:50 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-parkour-pyramid/20220604161550__1.18.2.zip) | [Link](https://web.archive.org/web/20220604161550if_/https://hielkemaps.com/downloads/Parkour%20Pyramid.zip) | `a6a4b87dcb15` |
 | 1.18.1 | 2022-02-09 20:15:05 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-parkour-pyramid/20220209201505__1.18.1.zip) | [Link](https://web.archive.org/web/20220209201505if_/https://hielkemaps.com/downloads/Parkour%20Pyramid.zip) | `7951f9b63462` |
 
-## [Parkour Spiral](https://hielkemaps.com/downloads/Parkour%20Spiral.zip)
+## [Parkour Spiral](https://hielkemaps.com/maps/parkour-spiral)
+
+<!-- Source download: https://hielkemaps.com/downloads/Parkour%20Spiral.zip -->
 
 <img src="thumbnails/maps/parkour-spiral/thumbnail.jpg" alt="Parkour Spiral" width="180">
 
@@ -114,7 +132,9 @@ Versionen werden aus `level.dat` (NBT, via `nbt2yaml`) gelesen; bei unlesbaren D
 | 1.18.2 | 2022-05-31 11:42:55 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-parkour-spiral/20220531114255__1.18.2.zip) | [Link](https://web.archive.org/web/20220531114255if_/https://hielkemaps.com/downloads/Parkour%20Spiral.zip) | `58786831c83c` |
 | 1.18.1 | 2022-01-28 00:56:05 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-parkour-spiral/20220128005605__1.18.1.zip) | [Link](https://web.archive.org/web/20220128005605if_/https://hielkemaps.com/downloads/Parkour%20Spiral.zip) | `ec4e973e521e` |
 
-## [Parkour Spiral 2](https://hielkemaps.com/downloads/Parkour%20Spiral%202.zip)
+## [Parkour Spiral 2](https://hielkemaps.com/maps/parkour-spiral-2)
+
+<!-- Source download: https://hielkemaps.com/downloads/Parkour%20Spiral%202.zip -->
 
 <img src="thumbnails/maps/parkour-spiral-2/thumbnail.jpg" alt="Parkour Spiral 2" width="180">
 
@@ -128,7 +148,9 @@ Versionen werden aus `level.dat` (NBT, via `nbt2yaml`) gelesen; bei unlesbaren D
 | 1.18.2 | 2022-05-31 12:02:46 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-parkour-spiral-2/20220531120246__1.18.2.zip) | [Link](https://web.archive.org/web/20220531120246if_/https://hielkemaps.com/downloads/Parkour%20Spiral%202.zip) | `1b993519d424` |
 | 1.18.1 | 2022-02-09 20:14:57 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-parkour-spiral-2/20220209201457__1.18.1.zip) | [Link](https://web.archive.org/web/20220209201457if_/https://hielkemaps.com/downloads/Parkour%20Spiral%202.zip) | `97902993076b` |
 
-## [Parkour Spiral 3](https://hielkemaps.com/downloads/Parkour%20Spiral%203.zip)
+## [Parkour Spiral 3](https://hielkemaps.com/maps/parkour-spiral-3)
+
+<!-- Source download: https://hielkemaps.com/downloads/Parkour%20Spiral%203.zip -->
 
 <img src="thumbnails/maps/parkour-spiral-3/thumbnail.jpg" alt="Parkour Spiral 3" width="180">
 
@@ -144,7 +166,9 @@ Versionen werden aus `level.dat` (NBT, via `nbt2yaml`) gelesen; bei unlesbaren D
 | 1.19.4 | 2023-05-31 03:37:55 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-parkour-spiral-3/20230531033755__1.19.4.zip) | [Link](https://web.archive.org/web/20230531033755if_/https://hielkemaps.com/downloads/Parkour%20Spiral%203.zip) | `113b39ae657a` |
 | 1.18.2 | 2022-05-31 12:20:19 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-parkour-spiral-3/20220531122019__1.18.2.zip) | [Link](https://web.archive.org/web/20220531122019if_/https://hielkemaps.com/downloads/Parkour%20Spiral%203.zip) | `a24debbb2006` |
 
-## [Parkour Town](https://hielkemaps.com/downloads/Parkour%20Town.zip)
+## [Parkour Town](https://hielkemaps.com/maps/parkour-town)
+
+<!-- Source download: https://hielkemaps.com/downloads/Parkour%20Town.zip -->
 
 <img src="thumbnails/maps/parkour-town/thumbnail.jpg" alt="Parkour Town" width="180">
 
@@ -155,7 +179,9 @@ Versionen werden aus `level.dat` (NBT, via `nbt2yaml`) gelesen; bei unlesbaren D
 | 1.21.5 | 2025-09-02 07:06:30 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-parkour-town/20250902070630__1.21.5.zip) | [Link](https://web.archive.org/web/20250902070630if_/https://hielkemaps.com/downloads/Parkour%20Town.zip) | `0c08bfcc0ead` |
 | 1.19.3 | 2023-01-02 23:05:58 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-parkour-town/20230102230558__1.19.3.zip) | [Link](https://web.archive.org/web/20230102230558if_/https://hielkemaps.com/downloads/Parkour%20Town.zip) | `7ef7efb2748f` |
 
-## [Parkour Volcano](https://hielkemaps.com/downloads/Parkour%20Volcano.zip)
+## [Parkour Volcano](https://hielkemaps.com/maps/parkour-volcano)
+
+<!-- Source download: https://hielkemaps.com/downloads/Parkour%20Volcano.zip -->
 
 <img src="thumbnails/maps/parkour-volcano/thumbnail.jpg" alt="Parkour Volcano" width="180">
 

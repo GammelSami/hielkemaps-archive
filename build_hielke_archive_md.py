@@ -523,6 +523,14 @@ def sync_release(map_display_name: str, live_url: str, versions: dict) -> set[st
     return uploaded
 
 
+def map_page_url(download_url: str) -> str:
+    if is_community(download_url):
+        return "https://hielkemaps.com/community-maps/"
+    name = map_name(download_url).removesuffix(" Resource Pack")
+    slug = re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
+    return f"https://hielkemaps.com/maps/{slug}"
+
+
 def write_markdown(out_file: str, title: str, urls: list[str], results: dict, errors: dict, thumbs: dict):
     with io.StringIO() as f:
         generated = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
@@ -541,7 +549,8 @@ def write_markdown(out_file: str, title: str, urls: list[str], results: dict, er
 
         for url in sorted(urls, key=map_name):
             name = map_name(url)
-            f.write(f"## [{name}]({url})\n\n")
+            f.write(f"## [{name}]({map_page_url(url)})\n\n")
+            f.write(f"<!-- Source download: {url} -->\n\n")
             thumb = thumbs.get(name)
             if thumb:
                 f.write(f'<img src="{urllib.parse.quote(thumb, safe="/")}" alt="{escape(name, quote=True)}" width="180">\n')
@@ -656,6 +665,7 @@ def collect_download_urls(maps_html: str, community_html: str, sitemap_xml: str,
             with open(path, encoding="utf-8") as f:
                 previous = f.read()
                 urls.extend(re.findall(r"Aktuelle Download-URL: (https://\S+)", previous))
+                urls.extend(re.findall(r"<!-- Source download: (https://hielkemaps\.com/downloads/\S+) -->", previous))
                 urls.extend(re.findall(r"^## \[[^\]]+\]\((https://hielkemaps\.com/downloads/[^)]+)\)", previous, re.MULTILINE))
     return list(OrderedDict.fromkeys(normalize_url(u) for u in urls))
 
