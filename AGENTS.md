@@ -14,6 +14,9 @@
   Link community maps to the community overview and resource packs to their
   parent map page. Keep ZIP downloads in the version table. Do not add
   separate current-download or release-link lines above the thumbnail/table.
+- Keep map sections in the order shown on the corresponding website listing,
+  not alphabetical order. Append sitemap-only or archived-only maps after listed
+  maps, keeping accompanying resource packs directly after their parent map.
 
 ## Archive completeness
 

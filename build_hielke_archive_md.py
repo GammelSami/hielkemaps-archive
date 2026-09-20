@@ -547,7 +547,7 @@ def write_markdown(out_file: str, title: str, urls: list[str], results: dict, er
             "Snapshot (`-` = kein Wayback-Eintrag vorhanden).\n\n"
         )
 
-        for url in sorted(urls, key=map_name):
+        for url in urls:
             name = map_name(url)
             f.write(f"## [{name}]({map_page_url(url)})\n\n")
             f.write(f"<!-- Source download: {url} -->\n\n")
@@ -649,7 +649,7 @@ def collect_download_urls(maps_html: str, community_html: str, sitemap_xml: str,
     sitemap = extract_sitemap_slugs(sitemap_xml)
     if not listed or not sitemap or not urls:
         raise RuntimeError("Discovery incomplete: map listing, sitemap or community downloads are empty; inspect website structure")
-    for slug in sorted(set(listed) | set(sitemap)):
+    for slug in dict.fromkeys([*listed, *sitemap]):
         page = fetch_text(f"https://hielkemaps.com/maps/{slug}")
         downloads = extract_download_urls(page)
         if not downloads:

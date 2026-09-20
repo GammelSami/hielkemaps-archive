@@ -1,40 +1,10 @@
 # Community Archive - Maps by community creators
 
-_Generated: 2026-09-20 10:52 UTC_
+_Generated: 2026-09-20 15:33 UTC_
 
 Quelle: `https://hielkemaps.com/maps/` und `https://hielkemaps.com/community-maps/`.
 
 Versionen werden aus `level.dat` (NBT, via `nbt2yaml`) gelesen; bei unlesbaren Dateien steht `Unknown`. Die Spalte **Download** zeigt auf das ZIP im passenden GitHub-Release, **Archive.org** auf den Wayback-Snapshot (`-` = kein Wayback-Eintrag vorhanden).
-
-## [Candy Cane Parkour](https://hielkemaps.com/community-maps/)
-
-<!-- Source download: https://hielkemaps.com/downloads/community/Candy%20Cane%20Parkour.zip -->
-
-<img src="thumbnails/community-maps/candy-cane-parkour.jpg" alt="Candy Cane Parkour" width="180">
-
-| Minecraft Java | Snapshot (UTC) | Download | Archive.org | SHA1 |
-|---|---|---|---|---|
-| 1.20.4 | 2026-02-11 18:25:34 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-candy-cane-parkour/20260211182534__1.20.4.zip) | [Link](https://web.archive.org/web/20260920102634if_/https://hielkemaps.com/downloads/community/Candy%20Cane%20Parkour.zip) | `ad15db15ec67` |
-
-## [Christmas Pyramid](https://hielkemaps.com/community-maps/)
-
-<!-- Source download: https://hielkemaps.com/downloads/community/Christmas%20Pyramid.zip -->
-
-<img src="thumbnails/community-maps/christmas-pyramid.jpg" alt="Christmas Pyramid" width="180">
-
-| Minecraft Java | Snapshot (UTC) | Download | Archive.org | SHA1 |
-|---|---|---|---|---|
-| 1.17.1 | 2026-02-11 18:23:39 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-christmas-pyramid/20260211182339__1.17.1.zip) | [Link](https://web.archive.org/web/20260920102046if_/https://hielkemaps.com/downloads/community/Christmas%20Pyramid.zip) | `56613d67842a` |
-
-## [Dimension Eggs](https://hielkemaps.com/community-maps/)
-
-<!-- Source download: https://hielkemaps.com/downloads/community/Dimension%20Eggs.zip -->
-
-<img src="thumbnails/community-maps/dimension-eggs.jpg" alt="Dimension Eggs" width="180">
-
-| Minecraft Java | Snapshot (UTC) | Download | Archive.org | SHA1 |
-|---|---|---|---|---|
-| 1.18.2 | 2026-02-11 18:23:19 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-dimension-eggs/20260211182319__1.18.2.zip) | [Link](https://web.archive.org/web/20260920102011if_/https://hielkemaps.com/downloads/community/Dimension%20Eggs.zip) | `54e68f3c3865` |
 
 ## [Halloween Spiral](https://hielkemaps.com/community-maps/)
 
@@ -86,6 +56,26 @@ Versionen werden aus `level.dat` (NBT, via `nbt2yaml`) gelesen; bei unlesbaren D
 |---|---|---|---|---|
 | 1.21.11 | 2026-09-20 02:12:39 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-halloween-spiral-5/20260920021239__1.21.11.zip) | [Link](https://web.archive.org/web/20260920101911if_/https://hielkemaps.com/downloads/community/Halloween%20Spiral%205.zip) | `05a2efa3b753` |
 
+## [Dimension Eggs](https://hielkemaps.com/community-maps/)
+
+<!-- Source download: https://hielkemaps.com/downloads/community/Dimension%20Eggs.zip -->
+
+<img src="thumbnails/community-maps/dimension-eggs.jpg" alt="Dimension Eggs" width="180">
+
+| Minecraft Java | Snapshot (UTC) | Download | Archive.org | SHA1 |
+|---|---|---|---|---|
+| 1.18.2 | 2026-02-11 18:23:19 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-dimension-eggs/20260211182319__1.18.2.zip) | [Link](https://web.archive.org/web/20260920102011if_/https://hielkemaps.com/downloads/community/Dimension%20Eggs.zip) | `54e68f3c3865` |
+
+## [Christmas Pyramid](https://hielkemaps.com/community-maps/)
+
+<!-- Source download: https://hielkemaps.com/downloads/community/Christmas%20Pyramid.zip -->
+
+<img src="thumbnails/community-maps/christmas-pyramid.jpg" alt="Christmas Pyramid" width="180">
+
+| Minecraft Java | Snapshot (UTC) | Download | Archive.org | SHA1 |
+|---|---|---|---|---|
+| 1.17.1 | 2026-02-11 18:23:39 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-christmas-pyramid/20260211182339__1.17.1.zip) | [Link](https://web.archive.org/web/20260920102046if_/https://hielkemaps.com/downloads/community/Christmas%20Pyramid.zip) | `56613d67842a` |
+
 ## [Summer Paradise](https://hielkemaps.com/community-maps/)
 
 <!-- Source download: https://hielkemaps.com/downloads/community/Summer%20Paradise.zip -->
@@ -115,6 +105,16 @@ Versionen werden aus `level.dat` (NBT, via `nbt2yaml`) gelesen; bei unlesbaren D
 | Minecraft Java | Snapshot (UTC) | Download | Archive.org | SHA1 |
 |---|---|---|---|---|
 | 1.19.2 | 2026-02-11 18:25:02 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-winter-paradise/20260211182502__1.19.2.zip) | [Link](https://web.archive.org/web/20260920102543if_/https://hielkemaps.com/downloads/community/Winter%20Paradise.zip) | `e6278d994ec5` |
+
+## [Candy Cane Parkour](https://hielkemaps.com/community-maps/)
+
+<!-- Source download: https://hielkemaps.com/downloads/community/Candy%20Cane%20Parkour.zip -->
+
+<img src="thumbnails/community-maps/candy-cane-parkour.jpg" alt="Candy Cane Parkour" width="180">
+
+| Minecraft Java | Snapshot (UTC) | Download | Archive.org | SHA1 |
+|---|---|---|---|---|
+| 1.20.4 | 2026-02-11 18:25:34 | [ZIP](https://github.com/GammelSami/hielkemaps-archive/releases/download/map-candy-cane-parkour/20260211182534__1.20.4.zip) | [Link](https://web.archive.org/web/20260920102634if_/https://hielkemaps.com/downloads/community/Candy%20Cane%20Parkour.zip) | `ad15db15ec67` |
 
 ## Fehler/Unklare Faelle
 

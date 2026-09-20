@@ -76,9 +76,12 @@ class ArchiveTests(unittest.TestCase):
         with patch.object(archive, 'fetch_text', side_effect=pages.__getitem__):
             with patch.object(archive.os.path, 'exists', return_value=False):
                 urls = archive.collect_download_urls(listing, community, sitemap)
-        self.assertEqual(len(urls), 4)
-        self.assertIn('https://hielkemaps.com/downloads/Actual%20Name.zip', urls)
-        self.assertIn('https://hielkemaps.com/downloads/Arrow%20Fight%20Resource%20Pack.zip', urls)
+        self.assertEqual(urls, [
+            'https://hielkemaps.com/downloads/community/Example.zip',
+            'https://hielkemaps.com/downloads/Actual%20Name.zip',
+            'https://hielkemaps.com/downloads/Arrow%20Fight.zip',
+            'https://hielkemaps.com/downloads/Arrow%20Fight%20Resource%20Pack.zip',
+        ])
 
     def test_discovery_supports_anchor_links_and_fails_on_empty_listing(self):
         self.assertEqual(archive.extract_map_slugs('<a href="/maps/arrow-fight/">Map</a>'), ['arrow-fight'])
