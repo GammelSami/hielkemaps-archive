@@ -20,9 +20,12 @@
 
 ## Archive completeness
 
-- During updates, inspect the live website structure before trusting the scraper.
+- During updates, inspect the live website structure and check for changes before
+  trusting the scraper. Capture every map discoverable from the website, sitemap,
+  known URLs, and archive backups; do not assume the current listing is complete.
 - Cross-check map listings, sitemap.xml, individual map pages, and known archived
   URLs. A listing-only count is not proof of completeness.
+- Search backups fully, including archives nested inside other archives.
 - Follow actual download links; do not rely only on title-cased slug guesses.
 - Include publicly linked Java maps and accompanying resource packs. Identify
   Marketplace-only Bedrock products separately rather than counting them as saved.
@@ -35,8 +38,8 @@
 
 ## Archive.org
 
-- Re-submit every current map download and accompanying resource pack to Archive.org
-  during a requested archive refresh, including byte-identical local downloads.
+- Submit currently available map downloads and accompanying resource packs to
+  Archive.org during an archive refresh, including byte-identical local downloads.
 - Local deduplication must not suppress Save Page Now requests.
 - Treat submission, completed capture, and verified matching ZIP content as distinct
   states. A successful local download or GitHub upload is not a Wayback success.

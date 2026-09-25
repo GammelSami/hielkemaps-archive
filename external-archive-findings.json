@@ -1,0 +1,168 @@
+{
+  "baseline_zip_count": 87,
+  "comparison": "SHA-256 of complete ZIP bytes and SHA-256 of sorted member paths plus uncompressed member SHA-256, ignoring one common enclosing directory. Compared against all 87 existing ZIPs.",
+  "files": [
+    {
+      "name": "Parkour Spiral",
+      "url": "https://mapcraft.me/files/Parkour+Spiral.zip",
+      "resolved_url": "https://mapcraft.me/files/Parkour+Spiral.zip",
+      "bad_member": null,
+      "version": "1.12.2",
+      "sha256": "22380bc87ae6ca4bbe0fdb03265fc53ac33ca885e55b530001a1a4b4664fbb32",
+      "bytes": 2900448,
+      "local_path": "archive_zips/_external_research/Parkour_Spiral.zip",
+      "normalized_content_sha256": "b224fc9f88a1e49c60cd10f8f36c9960f826bef400b996ddda54b51d114fefa5",
+      "source_page": "https://mapcraft.me/parkour-maps/parkour-spiral",
+      "status": "downloaded_and_crc_checked_not_published",
+      "matches_existing_archive": [],
+      "retrieved_at_utc": "2026-09-20T15:43:34.573058+00:00"
+    },
+    {
+      "name": "Parkour Spiral 2",
+      "url": "https://mapcraft.me/files/Parkour+Spiral+2.zip",
+      "resolved_url": "https://mapcraft.me/files/Parkour+Spiral+2.zip",
+      "bad_member": null,
+      "version": "1.12.2",
+      "sha256": "b2dcfb74364170b5f5c3d2b1861344a8e1f557e28d09975ee7a211973d071c78",
+      "bytes": 17505471,
+      "local_path": "archive_zips/_external_research/Parkour_Spiral_2.zip",
+      "normalized_content_sha256": "a9ac64384d95c70921a7e07e64c7bd2921db8a769300b7da63fe918695844bbd",
+      "source_page": "https://mapcraft.me/parkour-maps/parkour-spiral-2",
+      "status": "downloaded_and_crc_checked_not_published",
+      "matches_existing_archive": [],
+      "retrieved_at_utc": "2026-09-20T15:43:34.573071+00:00"
+    },
+    {
+      "name": "Parkour Paradise",
+      "url": "https://mapcraft.me/files/Parkour+Paradise.zip",
+      "resolved_url": "https://mapcraft.me/files/Parkour+Paradise.zip",
+      "bad_member": null,
+      "version": "1.12.2",
+      "sha256": "8fa48123950446307686f080768a7dd2a8aebbb062200ac5be542061fbdfe31b",
+      "bytes": 9752975,
+      "local_path": "archive_zips/_external_research/Parkour_Paradise.zip",
+      "normalized_content_sha256": "6cb2fc8cee3e148482064155c0f0cf209037e3d96a5b327c6ef953486023e7fa",
+      "source_page": "https://mapcraft.me/parkour-maps/parkour-paradise",
+      "status": "downloaded_and_crc_checked_not_published",
+      "matches_existing_archive": [],
+      "retrieved_at_utc": "2026-09-20T15:43:34.573074+00:00"
+    },
+    {
+      "name": "Parkour Paradise 2",
+      "url": "https://mapcraft.me/files/Parkour+Paradise+2.zip",
+      "resolved_url": "https://mapcraft.me/files/Parkour+Paradise+2.zip",
+      "bad_member": null,
+      "version": "1.9.4",
+      "sha256": "8c6193c4413872089c10660c7fe83cedb142ade30e4f8af377c9c31443ef6650",
+      "bytes": 10234606,
+      "local_path": "archive_zips/_external_research/Parkour_Paradise_2.zip",
+      "normalized_content_sha256": "1822980559ce974baec020569c6dd7fb549395878632f642f0d4fd9039540b72",
+      "source_page": "https://mapcraft.me/parkour-maps/parkour-paradise-2",
+      "status": "downloaded_and_crc_checked_not_published",
+      "matches_existing_archive": [],
+      "retrieved_at_utc": "2026-09-20T15:43:34.573077+00:00"
+    },
+    {
+      "name": "Parkour Paradise 3",
+      "url": "https://mapcraft.me/files/Parkour+Paradise+3.zip",
+      "resolved_url": "https://mapcraft.me/files/Parkour+Paradise+3.zip",
+      "bad_member": null,
+      "version": "1.12.2",
+      "sha256": "18f5409d7495fd7d85e2c8db4c341305e2f19c1111224069af46d0d603074bba",
+      "bytes": 13383967,
+      "local_path": "archive_zips/_external_research/Parkour_Paradise_3.zip",
+      "normalized_content_sha256": "46ca3dd7420649503bce6286ccf1419fa9f5d2725d7a32c9930e55cd9b8ed297",
+      "source_page": "https://mapcraft.me/parkour-maps/parkour-paradise-3",
+      "status": "downloaded_and_crc_checked_not_published",
+      "matches_existing_archive": [],
+      "retrieved_at_utc": "2026-09-20T15:43:34.573078+00:00"
+    },
+    {
+      "name": "Parkour Paradise Sky Islands",
+      "url": "https://mapcraft.me/files/Parkour+Paradise+Sky+Islands.zip",
+      "resolved_url": "https://mapcraft.me/files/Parkour+Paradise+Sky+Islands.zip",
+      "bad_member": null,
+      "version": "1.9.2",
+      "sha256": "4b3cb0382eded6b6ab0a8b3598828eb88a69e4b0aecab7a9edd7873408650b6d",
+      "bytes": 4453685,
+      "local_path": "archive_zips/_external_research/Parkour_Paradise_Sky_Islands.zip",
+      "normalized_content_sha256": "4d09d9f9934f156df9c9d3d09fc066b8c351fa6212da4d617ff9b9014288fa34",
+      "source_page": "https://mapcraft.me/parkour-maps/parkour-paradise-sky-islands",
+      "status": "downloaded_and_crc_checked_not_published",
+      "matches_existing_archive": [],
+      "retrieved_at_utc": "2026-09-20T15:43:34.573080+00:00"
+    },
+    {
+      "name": "Parkour Pyramid",
+      "url": "https://www.mediafire.com/file/5xyosuozt9inrgt/Parkour-Pyramid-Map.zip/file",
+      "resolved_url": "https://www.mediafire.com/file/5xyosuozt9inrgt/Parkour-Pyramid-Map.zip/file",
+      "bad_member": null,
+      "version": "1.17.1",
+      "sha256": "1337fadd34f9672c91c5b6a6a761322760538a9273f2fd4f437dba7ca7092f97",
+      "bytes": 35978026,
+      "local_path": "archive_zips/_external_research/Parkour_Pyramid.zip",
+      "normalized_content_sha256": "a31965ffdf7ff7a17094ce6f9b0938b8f3e3b735d0f34209a7743191f2b4cc1f",
+      "source_page": "https://www.mc-mod.net/parkour-pyramid-map/",
+      "status": "downloaded_and_crc_checked_not_published",
+      "matches_existing_archive": [],
+      "retrieved_at_utc": "2026-09-20T15:43:34.573082+00:00"
+    },
+    {
+      "name": "Parkour Spiral 2 Resource Pack",
+      "url": "https://www.mediafire.com/file/xcc3y5isfc3h8kl/Parkour+Spiral+2+Resource+Pack.zip",
+      "resolved_url": "https://www.mediafire.com/file/xcc3y5isfc3h8kl/Parkour+Spiral+2+Resource+Pack.zip",
+      "bad_member": null,
+      "version": "Resource pack",
+      "sha256": "714549d5d63740a6044ed5b1e9a90630a2e8ca10682f6b1b8a97a416c0d1b617",
+      "bytes": 1685931,
+      "local_path": "archive_zips/_external_research/Parkour_Spiral_2_Resource_Pack.zip",
+      "normalized_content_sha256": "5d526786f2f61e34364159ee602c1025afa2b1551b9656240463ed02a7aeb769",
+      "source_page": "https://www.minecraft-france.fr/map-parkour-spiral-2/",
+      "status": "downloaded_and_crc_checked_not_published",
+      "matches_existing_archive": [],
+      "retrieved_at_utc": "2026-09-20T15:43:34.573086+00:00"
+    },
+    {
+      "name": "Parkour Spiral IA",
+      "url": "https://archive.org/download/parkour-spiral-map-1.12.2/Parkour-Spiral-Map-1.12.2.zip",
+      "source_page": "https://archive.org/details/parkour-spiral-map-1.12.2",
+      "bad_member": null,
+      "version": "1.17.1",
+      "sha256": "e2b4930a4b46cdf9f22f3d821311f0a245cb5c408e1e02240d1ac338d2ec3a98",
+      "bytes": 8579573,
+      "local_path": "archive_zips/_external_research/Parkour_Spiral_IA.zip",
+      "worlds": [
+        "Parkour Spiral/level.dat"
+      ],
+      "normalized_content_sha256": "db23fc530c9a1acfd7385cdc6b33d691c16987a72f5185b3996e7df57e8244a3",
+      "status": "downloaded_and_crc_checked_not_published",
+      "matches_existing_archive": [],
+      "retrieved_at_utc": "2026-09-20T15:43:34.573089+00:00"
+    },
+    {
+      "name": "Parkour Paradise IA",
+      "url": "https://archive.org/download/parkour-paradise-map/Parkour-Paradise-Map.zip",
+      "source_page": "https://archive.org/details/parkour-paradise-map",
+      "bad_member": null,
+      "version": null,
+      "sha256": "6aa230c2b926b28afb31cc7dc6ce483a8e7d0148fc12aaf96d869063cde89a36",
+      "bytes": 8765697,
+      "local_path": "archive_zips/_external_research/Parkour_Paradise_IA.zip",
+      "worlds": [
+        "Parkour Paradise/level.dat"
+      ],
+      "normalized_content_sha256": "2b40196a7b9edbf4017c56016f0e8218fc2f97e824458c1062f77f487353435b",
+      "status": "downloaded_and_crc_checked_not_published",
+      "matches_existing_archive": [],
+      "retrieved_at_utc": "2026-09-20T15:43:34.573090+00:00"
+    }
+  ],
+  "failed_downloads": [
+    {
+      "name": "Parkour Paradise early",
+      "url": "https://dl4.mc-mod.net/index.php?act=dl&id=1446621607",
+      "resolved_url": "https://dl4.9mcbox.com/index.php?act=dl&id=1446621607",
+      "error": "File is not a zip file"
+    }
+  ]
+}
